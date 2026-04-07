@@ -5,33 +5,33 @@
 @section('content')
 <div class="min-h-screen">
     <!-- Top Navigation Bar -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <nav class="bg-blue-800 shadow-lg sticky top-7 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center space-x-8">
                     <!-- Logo -->
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-tachometer-alt text-white text-xl"></i>
-                        </div>
+                        <div class="mx-auto h-14 w-14 rounded-full border-2 border-gray-200 flex items-center justify-center shadow-lg">
+                            <img src="{{ asset('asset/logo.png') }}" alt="Medrozo Logo" class=" rounded-full">
+                        </div> 
                         <div>
-                            <h1 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">GameTech ISP</h1>
-                            <p class="text-xs text-gray-500">Management System</p>
-                        </div>
+                            <h2 class="text-xl font-bold text-white"> <span class="text-yellow-400 text-2xl">G</span>ameTech UNLI FIBER</h2>
+                            <p class="text-xs text-white">Management System</p>
+                        </div>  
                     </div>
                     
                     <!-- Navigation Links -->
                     <div class="hidden md:flex space-x-4">
-                        <a href="{{ route('admin.dashboard') }}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition">
+                        <a href="{{ route('admin.dashboard') }}" class="text-white 700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition">
                             <i class="fas fa-home mr-2"></i>Dashboard
                         </a>
-                        <a href="#" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition">
+                        <a href="#" class="text-white 700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition">
                             <i class="fas fa-users mr-2"></i>Customers
                         </a>
-                        <a href="#" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition">
+                        <a href="#" class="text-white 700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition">
                             <i class="fas fa-chart-line mr-2"></i>Analytics
                         </a>
-                        <a href="#" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition">
+                        <a href="#" class="text-white 700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition">
                             <i class="fas fa-cog mr-2"></i>Settings
                         </a>
                     </div>
@@ -40,24 +40,24 @@
                 <!-- User Menu -->
                 <div class="flex items-center space-x-4">
                     <div class="relative">
-                        <i class="fas fa-bell text-gray-500 text-xl cursor-pointer hover:text-blue-600 transition"></i>
+                        <i class="fas fa-bell text-white text-xl cursor-pointer hover:text-orange-500 transition"></i>
                         <span class="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
                     </div>
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full flex items-center justify-center">
+                        <div class="w-10 h-10 bg-gradient-to-r from-orange-500 to-blue-800 rounded-full flex items-center justify-center">
                             <span class="text-white font-bold text-lg">{{ substr(auth()->user()->name, 0, 1) }}</span>
                         </div>
                         <div class="hidden md:block">
-                            <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->name }}</p>
-                            <p class="text-xs text-gray-500">Administrator</p>
+                            <p class="text-sm font-semibold text-white">{{ auth()->user()->name }}</p>
+                            <p class="text-xs text-gray-200">Administrator</p>
                         </div>
                     </div>
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf
-                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center space-x-2">
+                        <button type="submit" class="bg-orange-500 hover:bg-ororange-500 text-white mt-4 px-4 py-2 rounded-lg transition duration-200 flex items-center space-x-2">
                             <i class="fas fa-sign-out-alt"></i>
                             <span class="hidden md:inline">Logout</span>
-                        </button>
+                        </button>   
                     </form>
                 </div>
             </div>
@@ -67,11 +67,11 @@
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <!-- Welcome Banner -->
-        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 mb-8 text-white">
+        <div class="bg-gradient-to-r from-blue-500 to-blue-800 rounded-2xl p-8 mb-8 text-white">
             <div class="flex justify-between items-center">
-                <div>
+                <div>   
                     <h2 class="text-3xl font-bold mb-2">Welcome back, {{ auth()->user()->name }}!</h2>
-                    <p class="text-blue-100">Here's what's happening with your ISP network today.</p>
+                    <p class="text-white">Here's what's happening with your ISP network today.</p>
                 </div>
                 <div class="hidden md:block">
                     <i class="fas fa-chart-line text-6xl text-blue-300"></i>
@@ -85,11 +85,11 @@
             <div class="bg-white rounded-2xl shadow-lg p-6 stat-card cursor-pointer">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-users text-blue-600 text-xl"></i>
+                        <i class="fas fa-users text-orange-500 text-xl"></i>
                     </div>
                     <span class="text-3xl font-bold text-gray-800">{{ \App\Models\Customer::count() }}</span>
                 </div>
-                <h3 class="text-gray-600 font-medium">Total Customers</h3>
+                <h3 class="text-orange-500 font-medium">Total Customers</h3>
                 <p class="text-sm text-gray-400 mt-2">
                     <i class="fas fa-arrow-up text-green-500"></i> +12% from last month
                 </p>
@@ -99,11 +99,11 @@
             <div class="bg-white rounded-2xl shadow-lg p-6 stat-card cursor-pointer">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-peso-sign text-orange-600 text-xl"></i>
+                        <i class="fas fa-peso-sign text-ororange-500 text-xl"></i>
                     </div>
                     <span class="text-3xl font-bold text-gray-800">₱{{ number_format(\App\Models\Payment::whereMonth('payment_date', now()->month)->sum('amount'), 0) }}</span>
                 </div>
-                <h3 class="text-gray-600 font-medium">Monthly Revenue</h3>
+                <h3 class="text-orange-500 font-medium">Monthly Revenue</h3>
                 <p class="text-sm text-gray-400 mt-2">
                     <i class="fas fa-arrow-up text-green-500"></i> +8% from last month
                 </p>
@@ -113,11 +113,11 @@
             <div class="bg-white rounded-2xl shadow-lg p-6 stat-card cursor-pointer">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-check-circle text-yellow-600 text-xl"></i>
+                        <i class="fas fa-check-circle text-yeorange-500 text-xl"></i>
                     </div>
                     <span class="text-3xl font-bold text-gray-800">{{ \App\Models\Customer::where('is_active', true)->count() }}</span>
                 </div>
-                <h3 class="text-gray-600 font-medium">Active Customers</h3>
+                <h3 class="text-orange-500 font-medium">Active Customers</h3>
                 <p class="text-sm text-gray-400 mt-2">
                     <i class="fas fa-chart-line text-blue-500"></i> Network active
                 </p>
@@ -127,11 +127,11 @@
             <div class="bg-white rounded-2xl shadow-lg p-6 stat-card cursor-pointer">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                        <i class="fas fa-exclamation-triangle textorange-500 text-xl"></i>
                     </div>
                     <span class="text-3xl font-bold text-gray-800">{{ \App\Models\Customer::whereMonth('expiry_date', now()->month)->where('is_active', true)->count() }}</span>
                 </div>
-                <h3 class="text-gray-600 font-medium">Expiring This Month</h3>
+                <h3 class="text-orange-500 font-medium">Expiring This Month</h3>
                 <p class="text-sm text-gray-400 mt-2">
                     <i class="fas fa-clock text-orange-500"></i> Need attention
                 </p>
@@ -144,7 +144,7 @@
             <div class="bg-white rounded-2xl shadow-lg p-6">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-lg font-bold text-gray-800">
-                        <i class="fas fa-chart-line text-blue-600 mr-2"></i>Revenue Overview
+                        <i class="fas fa-chart-line text-orange-500 mr-2"></i>Revenue Overview
                     </h3>
                     <select class="text-sm border rounded-lg px-3 py-1 focus:outline-none focus:border-blue-500">
                         <option>This Month</option>
@@ -160,11 +160,11 @@
             <!-- Recent Activities -->
             <div class="bg-white rounded-2xl shadow-lg p-6">
                 <h3 class="text-lg font-bold text-gray-800 mb-6">
-                    <i class="fas fa-history text-orange-600 mr-2"></i>Recent Activities
+                    <i class="fas fa-history text-ororange-500 mr-2"></i>Recent Activities
                 </h3>
                 <div class="space-y-4">
                     <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
-                        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                        <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
                             <i class="fas fa-user-plus text-white text-sm"></i>
                         </div>
                         <div class="flex-1">
@@ -174,7 +174,7 @@
                         <span class="text-xs text-gray-400">5 mins ago</span>
                     </div>
                     <div class="flex items-center space-x-3 p-3 bg-orange-50 rounded-lg">
-                        <div class="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center">
+                        <div class="w-10 h-10 bg-ororange-500 rounded-full flex items-center justify-center">
                             <i class="fas fa-credit-card text-white text-sm"></i>
                         </div>
                         <div class="flex-1">
@@ -184,7 +184,7 @@
                         <span class="text-xs text-gray-400">1 hour ago</span>
                     </div>
                     <div class="flex items-center space-x-3 p-3 bg-yellow-50 rounded-lg">
-                        <div class="w-10 h-10 bg-yellow-600 rounded-full flex items-center justify-center">
+                        <div class="w-10 h-10 bg-yeorange-500 rounded-full flex items-center justify-center">
                             <i class="fas fa-tools text-white text-sm"></i>
                         </div>
                         <div class="flex-1">
@@ -201,7 +201,7 @@
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
             <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-orange-50">
                 <h3 class="text-lg font-bold text-gray-800">
-                    <i class="fas fa-receipt text-blue-600 mr-2"></i>Recent Transactions
+                    <i class="fas fa-receipt text-orange-500 mr-2"></i>Recent Transactions
                 </h3>
             </div>
             <div class="overflow-x-auto">
@@ -219,7 +219,7 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach(\App\Models\Payment::with('customer')->latest()->take(10)->get() as $payment)
                         <tr class="hover:bg-gray-50 transition">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">{{ $payment->receipt_number }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-orange-500">{{ $payment->receipt_number }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $payment->customer->name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $payment->customer->plan->name ?? 'N/A' }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">${{ number_format($payment->amount, 2) }}</td>

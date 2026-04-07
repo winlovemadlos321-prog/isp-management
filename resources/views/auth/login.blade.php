@@ -17,15 +17,13 @@
     <div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
             <!-- Logo and Title --> 
-            <div class="text-center">
-                <div class="mx-auto h-16 w-16 bg-white rounded-full flex items-center justify-center shadow-lg">
-                    <svg class="h-10 w-10 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                    </svg>
-                </div>
-                <h2 class="mt-6 text-4xl font-extrabold text-white"> <span class="text-yellow-400 text-5xl">G</span>ameTech UNLI FIBER</h2>
-                <h3 class="mt-2 text-xl font-medium text-white">Medrozo It Solutions</h3>
-                <p class="mt-2 text-sm text-indigo-200">Sign in to your account</p>
+            <div class="text-center">   
+                <div class="mx-auto h-20 w-20 bg-white rounded-full flex items-center justify-center shadow-lg">
+                    <img src="{{ asset('asset/logo.png') }}" alt="Medrozo Logo" class="bg-white rounded-full">
+                </div> 
+                <h3 class="mt-2 text-lg font-semibold text-white">Medrozo IT Solutions</h3>
+                <h2 class="text-4xl font-extrabold text-white"> <span class="text-yellow-400 text-5xl">G</span>ameTech UNLI FIBER</h2>
+                <p class="mt-6 text-sm text-indigo-200">Sign in to your account</p>
             </div>
 
             <!-- Login Form -->
@@ -103,7 +101,7 @@
                 </form>
 
                 <!-- Demo Credentials -->
-                <div class="mt-6 p-4 bg-white/5 rounded-lg border border-white/10">
+                <!-- <div class="mt-6 p-4 bg-white/5 rounded-lg border border-white/10">
                     <p class="text-xs text-center text-gray-100 mb-2">Demo Credentials</p>
                     <div class="space-y-1 text-xs text-gray-100">
                         <div class="flex justify-between">
@@ -119,7 +117,7 @@
                             <span class="text-blue-200">tech@isp.com / password</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- Footer -->

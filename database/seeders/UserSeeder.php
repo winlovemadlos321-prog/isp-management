@@ -10,8 +10,6 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Clear existing users first (optional)
-        User::truncate();
         
         // Create Admin User
         User::create([

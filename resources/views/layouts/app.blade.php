@@ -11,7 +11,8 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #ffffff;
+            /* background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%); */
         }
         .sidebar-item:hover {
             background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);

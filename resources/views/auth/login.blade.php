@@ -48,7 +48,7 @@
                                 </svg>
                             </div>
                             <input type="email" name="email" id="email" required value="{{ old('email') }}" 
-                                class="pl-10 block w-full px-3 py-3 bg-white/5 border border-gray-400 rounded-lg text-white placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                                class="pl-10 block w-full px-3 py-3 bg-white/5 border border-gray-400 rounded-lg text-white placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-200"
                                 placeholder="admin@isp.com">
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                 </svg>
                             </div>
                             <input type="password" name="password" id="password" required 
-                                class="pl-10 block w-full px-3 py-3 bg-white/5 border border-gray-400 rounded-lg text-white placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                                class="pl-10 block w-full px-3 py-3 bg-white/5 border border-gray-400 rounded-lg text-white placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-200"
                                 placeholder="••••••••">
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                                 </svg>
                             </div>
                             <select name="role" id="role" required 
-                                class="pl-10 block w-full px-3 py-3 bg-white/5 border border-gray-400 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 cursor-pointer">
+                                class="pl-10 block w-full px-3 py-3 bg-white/5 border border-gray-400 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-200 cursor-pointer">
                                 <option value="admin" class="bg-gray-800">👑 Administrator</option>
                                 <option value="cashier" class="bg-gray-800">💰 Cashier</option>
                                 <option value="technician" class="bg-gray-800">🔧 Technician</option>
@@ -89,7 +89,7 @@
                     <!-- Submit Button -->
                     <div>
                         <button type="submit" 
-                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 transform hover:scale-[1.02]">
+                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02]">
                             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                                 <svg class="h-5 w-5 text-white group-hover:text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
@@ -99,34 +99,13 @@
                         </button>
                     </div>
                 </form>
-
-                <!-- Demo Credentials -->
-                <!-- <div class="mt-6 p-4 bg-white/5 rounded-lg border border-white/10">
-                    <p class="text-xs text-center text-gray-100 mb-2">Demo Credentials</p>
-                    <div class="space-y-1 text-xs text-gray-100">
-                        <div class="flex justify-between">
-                            <span>👑 Admin:</span>
-                            <span class="text-blue-200">admin@isp.com / password</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>💰 Cashier:</span>
-                            <span class="text-blue-200">cashier@isp.com / password</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>🔧 Technician:</span>
-                            <span class="text-blue-200">tech@isp.com / password</span>
-                        </div>
-                    </div>
-                </div> -->
             </div>
-
             <!-- Footer -->
-            <div class="text-center">
+            <div class="pt-10 text-center">
                 <p class="text-xs text-gray-200">
                     &copy; 2026 ISP Management System. All rights reserved.
                 </p>
             </div>
-        </div>
     </div>
 </body>
 </html>

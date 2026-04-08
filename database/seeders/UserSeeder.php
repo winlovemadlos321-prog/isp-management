@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@isp.com',
             'password' => Hash::make('password'),
+            'role' => 'admin',
             'email_verified_at' => now(),
         ]);
         
@@ -24,6 +25,7 @@ class UserSeeder extends Seeder
             'name' => 'Cashier User',
             'email' => 'cashier@isp.com',
             'password' => Hash::make('password'),
+            'role' => 'staff',
             'email_verified_at' => now(),
         ]);
         
@@ -32,6 +34,7 @@ class UserSeeder extends Seeder
             'name' => 'Technician User',
             'email' => 'tech@isp.com',
             'password' => Hash::make('password'),
+            'role' => 'staff',
             'email_verified_at' => now(),
         ]);
     }

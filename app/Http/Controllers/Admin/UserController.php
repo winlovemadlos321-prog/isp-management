@@ -6,51 +6,57 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule; // ← This is needed for the update method
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
     public function index()
     {
         $users = User::orderBy('created_at', 'desc')->get();
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.user', compact('users'));
     }
+public function store(Request $request)
+{
+    try {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|in:Admin,Cashier,Technician,Marketing,Finance,HR/Accounts',
+        ]);
 
-    public function store(Request $request)
-    {
-        try {
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:8|confirmed',
-                'role' => 'required|in:user,staff,admin',
-            ]);
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role' => $validated['role'],
+            'email_verified_at' => now(),
+        ]);
 
-            $user = User::create([
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
-                'role' => $validated['role'],
-            ]);
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User created successfully!');
+            
+    } catch (\Exception $e) {
+        \Log::error('User creation failed: ' . $e->getMessage());
+        return redirect()->back()
+            ->with('error', 'Failed to create user: ' . $e->getMessage())
+            ->withInput();
+    }
+}
 
-            return redirect()->route('admin.users.index')
-                ->with('success', 'User created successfully!');
-                
-        } catch (\Exception $e) {
-            \Log::error('User creation failed: ' . $e->getMessage());
-            return redirect()->back()
-                ->with('error', 'Failed to create user: ' . $e->getMessage())
-                ->withInput();
-        }
+    public function create()
+    {   
+        $user = new User(); 
+        return view('admin.users.create',  compact('user')); 
     }
 
     public function edit($id)
     {
         try {
             $user = User::findOrFail($id);
-            return response()->json($user);
+            return view('admin.users.edit', compact('user'));
         } catch (\Exception $e) {
-            return response()->json(['error' => 'User not found'], 404);
+            abort(404, 'User not found');
         }
     }
 
@@ -59,7 +65,6 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
             
-            // This is where Rule is used - to ignore the current user's email when checking uniqueness
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => [
@@ -67,18 +72,16 @@ class UserController extends Controller
                     'string',
                     'email',
                     'max:255',
-                    Rule::unique('users')->ignore($user->id) // ← Rule is used here
+                    Rule::unique('users')->ignore($user->id)
                 ],
                 'password' => 'nullable|string|min:8|confirmed',
-                'role' => 'required|in:user,staff,admin',
+                'role' => 'required|in:Admin,Cashier,Technician,Marketing,Finance,HR/Accounts',
             ]);
 
-            // Update user details
             $user->name = $validated['name'];
             $user->email = $validated['email'];
             $user->role = $validated['role'];
             
-            // Only update password if provided
             if (!empty($validated['password'])) {
                 $user->password = Hash::make($validated['password']);
             }
@@ -106,7 +109,6 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
             
-            // Prevent users from deleting themselves
             if ($user->id === auth()->id()) {
                 return redirect()->route('admin.users.index')
                     ->with('error', 'You cannot delete your own account!');

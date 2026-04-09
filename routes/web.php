@@ -41,7 +41,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/payments/{payment}/reconcile', [PaymentController::class, 'reconcile'])->name('payments.reconcile');
 });
 
-
 // Cashier Routes
 Route::middleware(['auth'])->prefix('cashier')->name('cashier.')->group(function () {
     Route::get('/dashboard', [CashierController::class, 'dashboard'])->name('dashboard');

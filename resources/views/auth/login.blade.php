@@ -69,7 +69,7 @@
                     </div>
 
                     <!-- Role Selection -->
-                    <div>
+                    <!-- <div>
                         <label for="role" class="block text-sm font-medium text-gray-100">Login As</label>
                         <div class="mt-1 relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -84,7 +84,7 @@
                                 <option value="technician" class="bg-gray-800">🔧 Technician</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Submit Button -->
                     <div>

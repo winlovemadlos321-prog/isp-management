@@ -10,9 +10,17 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('created_at', 'desc')->get();
+        $search = $request->get('search'); 
+    
+        $users = User::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+            })
+            ->orderBy('created_at', 'asc')
+            ->paginate(5);
         return view('admin.users.user', compact('users'));
     }
 public function store(Request $request)
@@ -107,18 +115,24 @@ public function store(Request $request)
     public function destroy($id)
     {
         try {
+            // 1. Find the user or throw a 404 error if not found
             $user = User::findOrFail($id);
             
+              
+            // 2. Prevent admins from deleting their own account
             if ($user->id === auth()->id()) {
                 return redirect()->route('admin.users.index')
                     ->with('error', 'You cannot delete your own account!');
             }
-            
+
+            // 3. Delete the user (soft delete if the model uses SoftDeletes, otherwise permanent)
             $user->delete();
             
+            // 4. Redirect back to the user list with a success message
             return redirect()->route('admin.users.index')
                 ->with('success', 'User deleted successfully!');
-                
+            
+             // 5. If anything fails, log the error and redirect back with an error message
         } catch (\Exception $e) {
             \Log::error('User deletion failed: ' . $e->getMessage());
             return redirect()->back()

@@ -41,7 +41,7 @@
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span class="hidden md:inline">Logout</span>
                             </button>   
-                        </form>
+                        </form> 
                     </div>
                 </div>
             </div>

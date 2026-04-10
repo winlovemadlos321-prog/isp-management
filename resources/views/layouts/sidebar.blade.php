@@ -22,7 +22,7 @@
                 <span class="font-medium">Dashboard</span>
             </a>
             
-            <a href="{{ route('admin.users.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-200">
+            <a href="{{ route('admin.users.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-200">
                 <i class="fas fa-user-shield w-5"></i>
                 <span class="font-medium">Users</span>
             </a>

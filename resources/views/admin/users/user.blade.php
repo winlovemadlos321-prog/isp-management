@@ -39,12 +39,20 @@
                         <h3 class="text-lg font-bold text-gray-800">
                             <i class="fas fa-users text-orange-500 mr-2"></i>System Users
                         </h3>
-                        <div class="flex space-x-2">
-                            <input type="text" id="searchInput" placeholder="Search users..." class="px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 text-sm">
-                            <button onclick="filterUsers()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">
+                        <!-- Search Form - Server Side -->
+                        <form method="GET" action="{{ route('admin.users.index') }}" class="flex space-x-2">
+                            <input type="text" name="search" placeholder="Search users..." 
+                                   value="{{ request('search') }}"
+                                   class="px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 text-sm">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">
                                 <i class="fas fa-search"></i>
                             </button>
-                        </div>
+                            @if(request('search'))
+                                <a href="{{ route('admin.users.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-lg transition">
+                                    Clear
+                                </a>
+                            @endif
+                        </form>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -60,7 +68,7 @@
                             </tr>
                         </thead>
                         <tbody id="usersTableBody" class="bg-white divide-y divide-gray-200">
-                            @foreach($users as $user)
+                            @forelse($users as $user)
                             <tr class="hover:bg-gray-50 transition" id="user-row-{{ $user->id }}">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $user->id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -85,28 +93,32 @@
                                             <i class="fas fa-trash"></i> Delete
                                         </button>
                                     @else
-                                        <span class="text-gray-400 cursor-not-allowed" title="Cannot delete your own account">
+                                        <button class="text-gray-500 cursor-not-allowed" title="Cannot delete your own account">
                                             <i class="fas fa-trash"></i> Delete
-                                        </span>
+                                        </button>
                                     @endif
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                                    <i class="fas fa-users fa-3x mb-2 block"></i>
+                                    <p>No users found</p>
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
-                </div>
-                @if($users->isEmpty())
-                    <div class="text-center py-8 text-gray-500">
-                        <i class="fas fa-users fa-3x mb-2"></i>
-                        <p>No users found</p>
+                    <div class="mt-4 px-4 py-3">
+                        {{ $users->appends(request()->query())->links() }}
                     </div>
-                @endif
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Delete Confirmation Modal (retained) -->
+<!-- Delete Confirmation Modal -->
 <div id="deleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 hidden">
     <div class="relative top-20 mx-auto p-5 border w-full max-w-md shadow-lg rounded-lg bg-white">
         <div class="mb-4 text-center">
@@ -158,7 +170,6 @@
         `;
         toastContainer.appendChild(toast);
         
-        // Auto remove after 4 seconds
         setTimeout(() => {
             toast.style.opacity = '0';
             toast.style.transform = 'translateX(100%)';
@@ -166,7 +177,7 @@
         }, 4000);
     }
 
-    // Check for session flash messages
+    // Flash messages
     @if(session('success'))
         showToast('{{ session('success') }}', 'success');
     @endif
@@ -175,41 +186,16 @@
         showToast('{{ session('error') }}', 'error');
     @endif
 
-    // Search/Filter functionality
-    function filterUsers() {
-        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        const rows = document.querySelectorAll('#usersTableBody tr');
-        
-        rows.forEach(row => {
-            const name = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
-            const email = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-            
-            if (name.includes(searchTerm) || email.includes(searchTerm)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    }
-    
-    // Confirm Delete - opens modal
+    // Delete confirmation
     function confirmDelete(userId, userName) {
         document.getElementById('deleteUserName').innerText = userName;
         document.getElementById('deleteForm').action = `/admin/users/${userId}`;
         document.getElementById('deleteModal').classList.remove('hidden');
     }
     
-    // Close Delete Modal
     function closeDeleteModal() {
         document.getElementById('deleteModal').classList.add('hidden');
     }
-    
-    // Search on Enter key
-    document.getElementById('searchInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            filterUsers();
-        }
-    });
     
     // Close modal when clicking outside
     window.onclick = function(event) {

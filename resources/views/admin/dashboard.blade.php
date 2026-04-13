@@ -36,19 +36,19 @@
                 </a>
                 
                 <!-- Plans -->
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
+                <a href="{{ route('admin.plans.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
                     <i class="fas fa-tags w-5"></i>
                     <span class="font-medium">Plans</span>
                 </a>
                 
                 <!-- Customers -->
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
+                <a href="{{ route('admin.customers.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
                     <i class="fas fa-users w-5"></i>
                     <span class="font-medium">Customers</span>
                 </a>
                 
                 <!-- Payments -->
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
+                <a href="{{ route('admin.payments.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
                     <i class="fas fa-credit-card w-5"></i>
                     <span class="font-medium">Payments</span>
                 </a>
@@ -59,7 +59,7 @@
                     <span class="font-medium">Admin Logs</span>
                 </a>
 
-                <!-- Admin Logs -->
+                <!-- Settings -->
                 <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
                     <i class="fa-solid fa-gear w-5"></i>
                     <span class="font-medium"> Settings</span>
@@ -139,17 +139,19 @@
                     </p>
                 </div>
 
-                <!-- Monthly Revenue -->
+                <!-- Monthly Revenue (FIXED - uses real payment data) -->
                 <div class="bg-white rounded-2xl shadow-lg p-6 stat-card cursor-pointer">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
                             <i class="fas fa-peso-sign text-orange-500 text-xl"></i>
                         </div>
-                        <span class="text-3xl font-bold text-gray-800">₱{{ number_format(\App\Models\Payment::whereMonth('payment_date', now()->month)->sum('amount'), 0) }}</span>
+                        <span class="text-3xl font-bold text-gray-800">
+                            ₱{{ number_format(\App\Models\Payment::whereMonth('payment_date', now()->month)->whereYear('payment_date', now()->year)->sum('amount'), 2) }}
+                        </span>
                     </div>
                     <h3 class="text-orange-500 font-medium">Monthly Revenue</h3>
                     <p class="text-sm text-gray-400 mt-2">
-                        <i class="fas fa-arrow-up text-green-500"></i> +8% from last month
+                        <i class="fas fa-calendar-alt text-blue-500"></i> {{ now()->format('F Y') }}
                     </p>
                 </div>
 
@@ -167,13 +169,18 @@
                     </p>
                 </div>
 
-                <!-- Expiring Soon -->
+                <!-- Expiring Soon (FIXED - uses customer expiry dates) -->
                 <div class="bg-white rounded-2xl shadow-lg p-6 stat-card cursor-pointer">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
                             <i class="fas fa-exclamation-triangle text-orange-500 text-xl"></i>
                         </div>
-                        <span class="text-3xl font-bold text-gray-800">{{ \App\Models\Customer::whereMonth('expiry_date', now()->month)->where('is_active', true)->count() }}</span>
+                        <span class="text-3xl font-bold text-gray-800">
+                            {{ \App\Models\Customer::where('expiry_date', '>=', now()->startOfMonth())
+                                ->where('expiry_date', '<=', now()->endOfMonth())
+                                ->where('is_active', true)
+                                ->count() }}
+                        </span>
                     </div>
                     <h3 class="text-orange-500 font-medium">Expiring This Month</h3>
                     <p class="text-sm text-gray-400 mt-2">
@@ -207,36 +214,36 @@
                         <i class="fas fa-history text-orange-500 mr-2"></i>Recent Activities
                     </h3>
                     <div class="space-y-4">
+                        @php
+                            $recentCustomers = \App\Models\Customer::latest()->take(3)->get();
+                            $recentPayments = \App\Models\Payment::with('customer')->latest()->take(3)->get();
+                        @endphp
+                        
+                        @foreach($recentCustomers as $customer)
                         <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
                             <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
                                 <i class="fas fa-user-plus text-white text-sm"></i>
                             </div>
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-800">New customer registered</p>
-                                <p class="text-xs text-gray-500">John Doe joined Premium plan</p>
+                                <p class="text-xs text-gray-500">{{ $customer->name }} - {{ $customer->plan_name }} plan</p>
                             </div>
-                            <span class="text-xs text-gray-400">5 mins ago</span>
+                            <span class="text-xs text-gray-400">{{ $customer->created_at->diffForHumans() }}</span>
                         </div>
+                        @endforeach
+                        
+                        @foreach($recentPayments as $payment)
                         <div class="flex items-center space-x-3 p-3 bg-orange-50 rounded-lg">
                             <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
                                 <i class="fas fa-credit-card text-white text-sm"></i>
                             </div>
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-800">Payment received</p>
-                                <p class="text-xs text-gray-500">$79.99 from Sarah Smith</p>
+                                <p class="text-xs text-gray-500">₱{{ number_format($payment->amount, 2) }} from {{ $payment->customer->name ?? 'N/A' }}</p>
                             </div>
-                            <span class="text-xs text-gray-400">1 hour ago</span>
+                            <span class="text-xs text-gray-400">{{ $payment->created_at->diffForHumans() }}</span>
                         </div>
-                        <div class="flex items-center space-x-3 p-3 bg-yellow-50 rounded-lg">
-                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
-                                <i class="fas fa-tools text-white text-sm"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-medium text-gray-800">Installation completed</p>
-                                <p class="text-xs text-gray-500">New router installed for Mike Johnson</p>
-                            </div>
-                            <span class="text-xs text-gray-400">3 hours ago</span>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -261,15 +268,15 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach(\App\Models\Payment::with('customer')->latest()->take(10)->get() as $payment)
+                            @forelse(\App\Models\Payment::with('customer')->latest()->take(10)->get() as $payment)
                             <tr class="hover:bg-gray-50 transition">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-orange-500">{{ $payment->receipt_number }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $payment->customer->name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $payment->customer->plan->name ?? 'N/A' }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-orange-500">{{ $payment->receipt_number ?? 'N/A' }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $payment->customer->name ?? 'N/A' }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $payment->customer->plan_name ?? 'N/A' }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">₱{{ number_format($payment->amount, 2) }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $payment->payment_date->format('M d, Y') }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $payment->payment_date ? $payment->payment_date->format('M d, Y') : 'N/A' }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($payment->is_reconciled)
+                                    @if($payment->is_reconciled ?? false)
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                             <i class="fas fa-check-circle mr-1"></i>Completed
                                         </span>
@@ -280,7 +287,13 @@
                                     @endif
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                                    No payments recorded yet
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -299,7 +312,7 @@
         data: {
             labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
             datasets: [{
-                label: 'Revenue',
+                label: 'Revenue (₱)',
                 data: [12500, 15000, 18000, 22000],
                 borderColor: '#3B82F6',
                 backgroundColor: 'rgba(59, 130, 246, 0.1)',

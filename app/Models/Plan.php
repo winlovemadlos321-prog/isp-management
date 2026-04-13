@@ -1,21 +1,31 @@
 <?php
+// app/Models/Plan.php
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Plan extends Model
 {
-    protected $fillable = ['name', 'price', 'speed', 'data_cap', 'description', 'is_active'];
-    
-    protected $casts = [
-        'price' => 'decimal:2',
-        'is_active' => 'boolean',
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'price',
+        'speed',
+        'data_cap',
+        'description',
+        'is_active'
     ];
-    
-    public function customers(): HasMany
+
+    protected $casts = [
+        'is_active' => 'boolean',
+        'price' => 'decimal:2'
+    ];
+
+    public function customers()
     {
-        return $this->hasMany(Customer::class);
+        return $this->hasMany(Customer::class, 'plan_name', 'name');
     }
 }

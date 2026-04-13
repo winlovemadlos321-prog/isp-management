@@ -1,29 +1,29 @@
 <?php
+// app/Http/Controllers/Admin/PaymentController.php
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Payment;
+use App\Models\Customer;
+use App\Models\Log;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PaymentController extends Controller
 {
     public function index()
     {
-        $payments = Payment::with(['customer', 'receiver'])->latest()->paginate(20);
+        $payments = Payment::with('customer')->latest()->paginate(10);
         return view('admin.payments.index', compact('payments'));
     }
-    
-    public function show(Payment $payment)
-    {
-        $payment->load(['customer', 'receiver']);
-        return view('admin.payments.show', compact('payment'));
-    }
-    
+
     public function reconcile(Payment $payment)
     {
-        $payment->update(['is_reconciled' => true]);
-        
-        return back()->with('success', 'Payment reconciled successfully');
+        $payment->is_reconciled = true;
+        $payment->save();
+
+        Log::log('payment_reconciled', "Payment {$payment->receipt_number} was reconciled", $payment);
+
+        return redirect()->back()->with('success', 'Payment reconciled successfully!');
     }
 }

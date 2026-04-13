@@ -21,27 +21,32 @@
         
         <nav class="mt-6 px-4">
             <div class="space-y-2">
-                <a href="{{ route('admin.dashboard') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200">
+                <a href="{{ route('admin.dashboard') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-gradient-to-r from-orange-500 to-orange-600' : 'hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600' }}">
                     <i class="fas fa-home w-5"></i>
                     <span class="font-medium">Dashboard</span>
                 </a>
                 
-                <a href="{{ route('admin.users.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white bg-gradient-to-r from-orange-500 to-orange-600 transition-all duration-200">
+                <a href="{{ route('admin.users.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 {{ request()->routeIs('admin.users.*') ? 'bg-gradient-to-r from-orange-500 to-orange-600' : 'hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600' }}">
                     <i class="fas fa-user-shield w-5"></i>
                     <span class="font-medium">Users</span>
                 </a>
                 
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
+                <a href="{{ route('admin.plans.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
                     <i class="fas fa-tags w-5"></i>
                     <span class="font-medium">Plans</span>
                 </a>
                 
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
+                <a href="{{ route('admin.customers.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
                     <i class="fas fa-users w-5"></i>
                     <span class="font-medium">Customers</span>
                 </a>
                 
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
+                <a href="{{ route('admin.routers.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
+                    <i class="fas fa-server w-5"></i>
+                    <span class="font-medium">Routers</span>
+                </a>
+                
+                <a href="{{ route('admin.payments.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
                     <i class="fas fa-credit-card w-5"></i>
                     <span class="font-medium">Payments</span>
                 </a>
@@ -52,7 +57,7 @@
                 </a>
 
                 <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
-                    <i class="fa-solid fa-gear"></i>
+                    <i class="fa-solid fa-gear w-5"></i>
                     <span class="font-medium">Settings</span>
                 </a>
             </div>

@@ -1,24 +1,25 @@
 <?php
+// app/Http/Controllers/Admin/PlanController.php
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PlanController extends Controller
 {
     public function index()
     {
-        $plans = Plan::paginate(10);
-        return view('admin.plans.index', compact('plans'));
+        $plans = Plan::latest()->paginate(10);
+        return view('admin.plans.index', compact('plans'));  // ✅ ADD THIS LINE
     }
-    
+
     public function create()
     {
         return view('admin.plans.create');
     }
-    
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -27,18 +28,20 @@ class PlanController extends Controller
             'speed' => 'required|string',
             'data_cap' => 'nullable|string',
             'description' => 'nullable|string',
+            'is_active' => 'nullable|boolean'
         ]);
-        
+
         Plan::create($validated);
-        
-        return redirect()->route('admin.plans.index')->with('success', 'Plan created successfully');
+
+        return redirect()->route('admin.plans.index')
+            ->with('success', 'Plan created successfully!');
     }
-    
+
     public function edit(Plan $plan)
     {
         return view('admin.plans.edit', compact('plan'));
     }
-    
+
     public function update(Request $request, Plan $plan)
     {
         $validated = $request->validate([
@@ -47,21 +50,20 @@ class PlanController extends Controller
             'speed' => 'required|string',
             'data_cap' => 'nullable|string',
             'description' => 'nullable|string',
-            'is_active' => 'boolean',
+            'is_active' => 'nullable|boolean'
         ]);
-        
+
         $plan->update($validated);
-        
-        return redirect()->route('admin.plans.index')->with('success', 'Plan updated successfully');
+
+        return redirect()->route('admin.plans.index')
+            ->with('success', 'Plan updated successfully!');
     }
-    
+
     public function destroy(Plan $plan)
     {
-        if($plan->customers()->count() > 0) {
-            return back()->with('error', 'Cannot delete plan with active customers');
-        }
-        
         $plan->delete();
-        return redirect()->route('admin.plans.index')->with('success', 'Plan deleted successfully');
+
+        return redirect()->route('admin.plans.index')
+            ->with('success', 'Plan deleted successfully!');
     }
 }

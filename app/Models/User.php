@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'email_verified_at',
     ];
 
     /**
@@ -46,6 +47,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getRoleBadgeAttribute()
+    {
+        $badges = [
+            'admin'       => ['class' => 'bg-purple-100 text-purple-800', 'icon' => 'crown'],
+            'cashier'     => ['class' => 'bg-green-100 text-green-800', 'icon' => 'money-bill-wave'],
+            'technician'  => ['class' => 'bg-yellow-100 text-yellow-800', 'icon' => 'wrench'],
+            'marketing'   => ['class' => 'bg-pink-100 text-pink-800', 'icon' => 'chart-line'],
+            'finance'     => ['class' => 'bg-blue-100 text-blue-800', 'icon' => 'coins'],
+            'hr/accounts' => ['class' => 'bg-indigo-100 text-indigo-800', 'icon' => 'users'],
+        ];
+
+        $role = $this->role;
+        $badge = $badges[$role] ?? ['class' => 'bg-gray-100 text-gray-800', 'icon' => 'user'];
+
+        return "<span class=\"px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {$badge['class']}\">
+                    <i class=\"fas fa-{$badge['icon']} mr-1\"></i>{$role}
+                </span>";
     }
 
     //  // Helper method to check if user is admin

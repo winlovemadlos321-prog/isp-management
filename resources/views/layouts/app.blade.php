@@ -28,6 +28,16 @@
         .stat-card:hover {
             transform: translateY(-5px);
         }
+
+        .custom-pagination [aria-current="page"] span {
+            background-color: #f97316 !important;
+            border-color: #f97316 !important;
+        }
+
+        .custom-pagination a:hover {
+            background-color: #fed7aa !important;
+            color: #9a3412 !important;
+        }
     </style>
 </head>
 <body class="bg-gray-100">

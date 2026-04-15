@@ -19,7 +19,7 @@
     
     <nav class="mt-6 px-4">
         <div class="space-y-2">
-            @if($userRole === 'admin')
+            @if($userRole === 'admin')  
                 {{-- Admin Menu Items --}}
                 <a href="{{ route('admin.dashboard') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-gradient-to-r from-orange-500 to-orange-600' : 'hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600' }}">
                     <i class="fas fa-home w-5"></i>
@@ -36,7 +36,7 @@
                     <span class="font-medium">Plans</span>
                 </a>
                 
-                <a href="{{ route('admin.customers.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 {{ request()->routeIs('admin.customer.*') ? 'bg-gradient-to-r from-orange-500 to-orange-600' : 'hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600' }}">
+                <a href="{{ route('admin.customers.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 {{ request()->routeIs('admin.customers.*') ? 'bg-gradient-to-r from-orange-500 to-orange-600' : 'hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600' }}">
                     <i class="fas fa-users w-5"></i>
                     <span class="font-medium">Customers</span>
                 </a>
@@ -49,6 +49,12 @@
                 <a href="{{ route('admin.payments.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 {{ request()->routeIs('admin.payments.*') ? 'bg-gradient-to-r from-orange-500 to-orange-600' : 'hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600' }}">
                     <i class="fas fa-credit-card w-5"></i>
                     <span class="font-medium">Payments</span>
+                </a>
+                
+                <!-- ✅ TICKET DISPATCH LINK - ADDED HERE ✅ -->
+                <a href="{{ route('admin.tickets.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 {{ request()->routeIs('admin.tickets.*') ? 'bg-gradient-to-r from-orange-500 to-orange-600' : 'hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600' }}">
+                    <i class="fas fa-ticket-alt w-5"></i>
+                    <span class="font-medium">Ticket Dispatch</span>
                 </a>
                 
                 <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-all duration-200">
@@ -78,7 +84,7 @@
                     <span class="font-medium">Record Payment</span>
                 </a>
                 
-                <a href="{{ route('cashier.payments.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 {{ request()->routeIs('cashier.payments.index') ? 'bg-gradient-to-r from-orange-500 to-orange-600' : 'hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600' }}">
+                <a href="{{ route('cashier.payments.history') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 {{ request()->routeIs('cashier.payments.history') ? 'bg-gradient-to-r from-orange-500 to-orange-600' : 'hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600' }}">
                     <i class="fas fa-history w-5"></i>
                     <span class="font-medium">Payment History</span>
                 </a>
@@ -106,17 +112,21 @@
                 </a>
 
             @else
-                {{-- Default Menu --}}
-                <a href="{{ route('dashboard') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
+                {{-- Default Menu for guests --}}
+                <a href="{{ url('/') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
                     <i class="fas fa-home w-5"></i>
-                    <span class="font-medium">Dashboard</span>
+                    <span class="font-medium">Home</span>
+                </a>
+                
+                <a href="{{ route('login') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white transition-all duration-200 hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600">
+                    <i class="fas fa-sign-in-alt w-5"></i>
+                    <span class="font-medium">Login</span>
                 </a>
             @endif
 
             {{-- Common Bottom Menu Items (visible for all roles) --}}
             <div class="pt-6 mt-6 border-t border-blue-700">
-                {{-- Profile link removed temporarily --}}
-                
+                @if(auth()->check())
                 <form method="POST" action="{{ route('logout') }}" class="w-full">
                     @csrf
                     <button type="submit" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-red-600 transition-all duration-200 w-full">
@@ -124,6 +134,7 @@
                         <span class="font-medium">Logout</span>
                     </button>
                 </form>
+                @endif
             </div>
         </div>
     </nav>

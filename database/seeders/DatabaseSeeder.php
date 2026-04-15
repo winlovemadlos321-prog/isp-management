@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,  // This creates admin, cashier, technician
             // Add other seeders here
+            FakeUsersSeeder::class,   // ← add this
+            // any other seeders...
         ]);
     }
 }

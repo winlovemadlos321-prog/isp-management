@@ -30,7 +30,7 @@ public function store(Request $request)
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:Admin,Cashier,Technician,Marketing,Finance,HR/Accounts',
+            'role' => 'required|in:admin,cashier,technician,marketing,finance,hr/accounts',
         ]);
 
         $user = User::create([
@@ -83,7 +83,7 @@ public function store(Request $request)
                     Rule::unique('users')->ignore($user->id)
                 ],
                 'password' => 'nullable|string|min:8|confirmed',
-                'role' => 'required|in:Admin,Cashier,Technician,Marketing,Finance,HR/Accounts',
+                'role' => 'required|in:admin,cashier,technician,marketing,finance,hr/accounts',
             ]);
 
             $user->name = $validated['name'];

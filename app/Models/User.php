@@ -52,12 +52,12 @@ class User extends Authenticatable
     public function getRoleBadgeAttribute()
     {
         $badges = [
-            'Admin'       => ['class' => 'bg-purple-100 text-purple-800', 'icon' => 'crown'],
-            'Cashier'     => ['class' => 'bg-green-100 text-green-800', 'icon' => 'money-bill-wave'],
-            'Technician'  => ['class' => 'bg-yellow-100 text-yellow-800', 'icon' => 'wrench'],
-            'Marketing'   => ['class' => 'bg-pink-100 text-pink-800', 'icon' => 'chart-line'],
-            'Finance'     => ['class' => 'bg-blue-100 text-blue-800', 'icon' => 'coins'],
-            'HR/Accounts' => ['class' => 'bg-indigo-100 text-indigo-800', 'icon' => 'users'],
+            'admin'       => ['class' => 'bg-purple-100 text-purple-800', 'icon' => 'crown'],
+            'cashier'     => ['class' => 'bg-green-100 text-green-800', 'icon' => 'money-bill-wave'],
+            'technician'  => ['class' => 'bg-yellow-100 text-yellow-800', 'icon' => 'wrench'],
+            'marketing'   => ['class' => 'bg-pink-100 text-pink-800', 'icon' => 'chart-line'],
+            'finance'     => ['class' => 'bg-blue-100 text-blue-800', 'icon' => 'coins'],
+            'hr/accounts' => ['class' => 'bg-indigo-100 text-indigo-800', 'icon' => 'users'],
         ];
 
         $role = $this->role;

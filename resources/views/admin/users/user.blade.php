@@ -109,7 +109,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <div class="mt-4 px-4 py-3">
+                    <div class="px-4 py-2">
                         {{ $users->appends(request()->query())->links() }}
                     </div>
                 </div>

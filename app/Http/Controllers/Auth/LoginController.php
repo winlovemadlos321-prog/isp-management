@@ -21,11 +21,15 @@ class LoginController extends Controller
         
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            $request->session()->put('user_role', $request->role);
+
+            $user = Auth::user();
+            $role = $user->role;
+
+            $request->session()->put('user_role', $role);
             
-            if ($request->role === 'cashier') {
+            if ($role === 'cashier') {
                 return redirect()->route('cashier.dashboard');
-            } elseif ($request->role === 'technician') {
+            } elseif ($role === 'technician') {
                 return redirect()->route('technician.dashboard');
             }
             return redirect()->route('admin.dashboard');

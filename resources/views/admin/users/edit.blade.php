@@ -111,12 +111,12 @@
                                 <select id="role" name="role" required 
                                     class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <option value="" selected disabled>--Select Role--</option>
-                                    <option value="Admin" {{ old('role', $user->role) == 'Admin' ? 'selected' : '' }}>Admin</option>
-                                    <option value="Cashier" {{ old('role', $user->role) == 'Cashier' ? 'selected' : '' }}>Cashier</option>
-                                    <option value="Technician" {{ old('role', $user->role) == 'Technician' ? 'selected' : '' }}>Technician</option>
-                                    <option value="Marketing" {{ old('role', $user->role) == 'Marketing' ? 'selected' : '' }}>Marketing</option>
-                                    <option value="Finance" {{ old('role', $user->role) == 'Finance' ? 'selected' : '' }}>Finance</option>
-                                    <option value="HR/Accounts" {{ old('role', $user->role) == 'HR/Accounts' ? 'selected' : '' }}>HR/Accounts</option>
+                                    <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>admin</option>
+                                    <option value="cashier" {{ old('role', $user->role) == 'cashier' ? 'selected' : '' }}>cashier</option>
+                                    <option value="technician" {{ old('role', $user->role) == 'technician' ? 'selected' : '' }}>technician</option>
+                                    <option value="marketing" {{ old('role', $user->role) == 'marketing' ? 'selected' : '' }}>marketing</option>
+                                    <option value="finance" {{ old('role', $user->role) == 'finance' ? 'selected' : '' }}>finance</option>
+                                    <option value="hr/accounts" {{ old('role', $user->role) == 'hr/accounts' ? 'selected' : '' }}>hr/accounts</option>
                                 </select>
                             </div>
                         </div>

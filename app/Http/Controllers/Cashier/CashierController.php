@@ -61,7 +61,8 @@ class CashierController extends Controller
             'customer_number' => $customer->customer_number,
             'plan_name' => $customer->plan_name,
             'plan_price' => $customer->plan_price,
-            'name' => $customer->name
+            'name' => $customer->name,
+            'expiry_date' => $customer->expiry_date
         ]);
     }
 
@@ -72,6 +73,8 @@ class CashierController extends Controller
             'amount' => 'required|numeric|min:1',
             'payment_method' => 'required|in:cash,card,bank_transfer,gcash',
             'payment_date' => 'required|date',
+            'payment_for_month' => 'required|string',
+            'extend_months' => 'required|integer|min:1|max:12',
             'reference_number' => 'nullable|string|max:100',
             'notes' => 'nullable|string'
         ]);
@@ -81,8 +84,8 @@ class CashierController extends Controller
         try {
             $customer = Customer::findOrFail($validated['customer_id']);
             
-            // Generate receipt number
-            $receiptNumber = 'RCP-' . date('Ymd') . '-' . str_pad(Payment::count() + 1, 4, '0', STR_PAD_LEFT);
+            // Generate receipt number with unique check
+            $receiptNumber = $this->generateUniqueReceiptNumber();
             
             // Create payment
             $payment = Payment::create([
@@ -91,21 +94,21 @@ class CashierController extends Controller
                 'amount' => $validated['amount'],
                 'payment_method' => $validated['payment_method'],
                 'payment_date' => $validated['payment_date'],
+                'payment_for_month' => $validated['payment_for_month'],
                 'reference_number' => $validated['reference_number'] ?? null,
                 'notes' => $validated['notes'],
-                'payment_for_month' => date('Y-m-d'),
                 'is_reconciled' => true,
                 'received_by' => auth()->id()
             ]);
             
-            // Update customer expiry date (add 1 month)
-            $newExpiryDate = Carbon::parse($customer->expiry_date)->addMonth();
+            // Update customer expiry date (add selected months)
+            $newExpiryDate = Carbon::parse($customer->expiry_date)->addMonths($validated['extend_months']);
             $customer->update(['expiry_date' => $newExpiryDate]);
             
             DB::commit();
             
             return redirect()->route('cashier.payments.receipt', $payment)
-                ->with('success', 'Payment recorded successfully! Receipt #: ' . $receiptNumber);
+                ->with('success', 'Payment recorded successfully! Receipt #: ' . $receiptNumber . ' | Service extended by ' . $validated['extend_months'] . ' month(s)');
                 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -113,6 +116,20 @@ class CashierController extends Controller
                 ->with('error', 'Failed to record payment: ' . $e->getMessage())
                 ->withInput();
         }
+    }
+
+    // Helper method to generate unique receipt number
+    private function generateUniqueReceiptNumber()
+    {
+        $prefix = 'RCP-' . date('Ymd') . '-';
+        $counter = 1;
+        
+        do {
+            $receiptNumber = $prefix . str_pad($counter, 4, '0', STR_PAD_LEFT);
+            $counter++;
+        } while (Payment::where('receipt_number', $receiptNumber)->exists());
+        
+        return $receiptNumber;
     }
 
     public function paymentHistory(Request $request)
@@ -143,7 +160,6 @@ class CashierController extends Controller
         return view('cashier.customers.payments', compact('customer', 'payments'));
     }
 
-    // YOUR DAILY REPORT METHOD - KEPT EXACTLY AS YOU HAVE IT
     public function dailyReport(Request $request)
     {
         $date = $request->get('date', date('Y-m-d'));

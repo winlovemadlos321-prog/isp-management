@@ -13,7 +13,7 @@ class RouterController extends Controller
     public function index()
     {
         $routers = Router::latest()->paginate(10);
-        return view('admin.routers.index', compact('routers'));
+        return view('admin.routers.create', compact('routers'));
     }
 
     public function create()

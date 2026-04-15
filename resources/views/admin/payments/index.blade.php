@@ -16,7 +16,7 @@
                     <h2 class="text-2xl font-bold text-gray-800">
                         <i class="fas fa-credit-card text-orange-500 mr-2"></i>Manage Payments
                     </h2>
-                    <a href="{{ route('admin.payments.create') }}" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-700 transition">
+                    <a  class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-700 transition">
                         <i class="fas fa-plus mr-2"></i>Record Payment
                     </a>
                 </div>
@@ -49,7 +49,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <div class="flex space-x-2">
-                                        <a href="{{ route('admin.payments.show', $payment) }}" class="text-blue-600 hover:text-blue-900">
+                                        <a class="text-blue-600 hover:text-blue-900">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         @if(!$payment->is_reconciled)

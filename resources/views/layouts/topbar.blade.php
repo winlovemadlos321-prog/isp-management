@@ -24,13 +24,13 @@
                         <p class="text-xs text-gray-200">Administrator</p>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('logout') }}" class="inline">
+                <!-- <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
                     <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition duration-200 flex items-center space-x-2">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="hidden md:inline">Logout</span>
                     </button>   
-                </form>
+                </form> -->
             </div>
         </div>
     </div>

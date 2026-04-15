@@ -26,7 +26,7 @@
         <div id="reportContent" class="p-6">
             <!-- Report Header -->
             <div class="text-center mb-6 border-b pb-4">
-                <h2 class="text-2xl font-bold text-gray-800">GameTech UNLI FIBER</h2>
+                <h2 class="text-2xl font-bold text-gray-800"><span class="text-yellow-400 text-3xl">G</span>ameTech UNLI FIBER</h2>
                 <p class="text-gray-600">Daily Sales Report</p>
                 <p class="text-gray-500">{{ date('F d, Y', strtotime($date ?? date('Y-m-d'))) }}</p>
             </div>

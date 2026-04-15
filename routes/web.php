@@ -6,9 +6,10 @@ use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\RouterController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Cashier\CashierController;
+use App\Http\Controllers\Admin\AdminLogController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Technician\TechnicianController;
-use App\Http\Controllers\Admin\TicketDispatchController;  // ✅ ADD THIS
+use App\Http\Controllers\Admin\TicketDispatchController;  
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +41,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('routers', RouterController::class);
     Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
     Route::post('/payments/{payment}/reconcile', [PaymentController::class, 'reconcile'])->name('payments.reconcile');
-    
+    Route::get('/logs', [AdminLogController::class, 'index'])->name('logs.index');
+
     // ✅ TICKET DISPATCH ROUTES
     Route::resource('tickets', TicketDispatchController::class);
     Route::patch('/tickets/{ticket}/status', [TicketDispatchController::class, 'updateStatus'])->name('tickets.status');

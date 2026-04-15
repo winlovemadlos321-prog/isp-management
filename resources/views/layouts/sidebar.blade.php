@@ -57,7 +57,7 @@
                     <span class="font-medium">Ticket Dispatch</span>
                 </a>
                 
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-all duration-200">
+                <a href="{{ route('admin.logs.index') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-all duration-200">
                     <i class="fas fa-history w-5"></i>
                     <span class="font-medium">Admin Logs</span>
                 </a>
@@ -124,7 +124,6 @@
                 </a>
             @endif
 
-            {{-- Common Bottom Menu Items (visible for all roles) --}}
             <div class="pt-6 mt-6 border-t border-blue-700">
                 @if(auth()->check())
                 <form method="POST" action="{{ route('logout') }}" class="w-full">
@@ -136,6 +135,6 @@
                 </form>
                 @endif
             </div>
-        </div>
+        </div>  
     </nav>
 </aside>

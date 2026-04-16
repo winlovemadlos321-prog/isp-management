@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Technician\TechnicianController;
 use App\Http\Controllers\Admin\TicketDispatchController;  
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication Routes
@@ -43,9 +44,13 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/payments/{payment}/reconcile', [PaymentController::class, 'reconcile'])->name('payments.reconcile');
     Route::get('/logs', [AdminLogController::class, 'index'])->name('logs.index');
 
-    // ✅ TICKET DISPATCH ROUTES
+    // TICKET DISPATCH ROUTES
     Route::resource('tickets', TicketDispatchController::class);
     Route::patch('/tickets/{ticket}/status', [TicketDispatchController::class, 'updateStatus'])->name('tickets.status');
+    //Settings Routes
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.settings');
+    Route::put('/settings/profile', [SettingsController::class, 'updateProfile'])->name('admin.settings.updateProfile');
+    Route::put('/settings/password', [SettingsController::class, 'updatePassword'])->name('admin.settings.updatePassword');
 });
 
 // Cashier Routes

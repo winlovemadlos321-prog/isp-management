@@ -62,7 +62,7 @@
                     <span class="font-medium">Admin Logs</span>
                 </a>
 
-                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-all duration-200">
+                <a href="{{ route('admin.settings.settings') }}" class="sidebar-item flex items-center space-x-3 px-4 py-3 rounded-lg text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-600 transition-all duration-200">
                     <i class="fa-solid fa-gear w-5"></i>
                     <span class="font-medium">Settings</span>
                 </a>

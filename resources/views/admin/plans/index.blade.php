@@ -10,16 +10,22 @@
         @include('layouts.topbar')
 
         <div class="mt-10 py-8 px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-2xl shadow-lg p-6">
+            <div class="bg-gradient-to-r from-blue-500 via-blue-600 via-10% to-blue-800 rounded-2xl p-8 mb-8 text-white">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800">
-                        <i class="fas fa-tags text-orange-500 mr-2"></i>Manage Plans
-                    </h2>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">
+                            <i class="fas fa-tags text-orange-500 mr-2"></i>Manage Plans
+                        </h2>
+                        <p class="pt-2 text-white">
+                            Manage all plans offered to your customers
+                        </p>
+                    </div>
                     <a href="{{ route('admin.plans.create') }}" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-2 rounded-lg hover:from-orange-600 hover:to-orange-700 transition flex items-center space-x-2">
                         <i class="fas fa-plus"></i>
                         <span>Add New Plan</span>
                     </a>
                 </div>
+            </div>
 
                 @if(session('success'))
                     <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-lg" role="alert">
@@ -41,7 +47,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @forelse($plans as $plan)
-                        <div class="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all duration-300">
+                        <div class="shadow-md bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-xl p-6 hover:shadow-xl transition-all duration-300">
                             <div class="flex justify-between items-start mb-4">
                                 <h3 class="text-xl font-bold text-gray-800">{{ $plan->name }}</h3>
                                 @if($plan->is_active)
@@ -92,10 +98,9 @@
                     @endforelse
                 </div>
 
-                <div class="mt-6">
+                <div class="mt-6">  
                     {{ $plans->links() }}
-                </div>
-            </div>
+                </div>  
         </div>
     </div>
 </div>

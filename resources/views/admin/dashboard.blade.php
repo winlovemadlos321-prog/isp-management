@@ -22,7 +22,7 @@
                         <p class="text-white">Here's what's happening with your ISP network today.</p>
                     </div>
                     <div class="hidden md:block">
-                        <i class="fas fa-chart-line text-6xl text-blue-300"></i>
+                        <i class="fas fa-chart-line text-6xl text-white/70"></i>
                     </div>
                 </div>
             </div>

@@ -10,18 +10,21 @@
         @include('layouts.topbar')
 
         <div class="mt-10 py-8 px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-2xl shadow-lg p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800">
+            <div class="flex justify-between items-center bg-gradient-to-r from-blue-500 via-blue-600 via-10% to-blue-800 rounded-2xl p-8 mb-8 text-white"> 
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-2">
                         <i class="fas fa-ticket-alt text-orange-500 mr-2"></i>Ticket Dispatch
                     </h2>
-                    <a href="{{ route('admin.tickets.create') }}" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-2 rounded-lg hover:from-orange-600 transition flex items-center space-x-2">
-                        <i class="fas fa-plus"></i>
-                        <span>Create Ticket</span>
-                    </a>
-                </div>
+                    <p class="text-white/90">Manage and track all support tickets for your ISP network.</p>
+                </div>   
+                <a href="{{ route('admin.tickets.create') }}" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-2 rounded-lg hover:from-orange-600 transition flex items-center space-x-2">
+                    <i class="fas fa-plus"></i>
+                    <span>Create Ticket</span>
+                </a>
+            </div>
 
-                <!-- Stats Cards -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">             
+                <!-- Stats Cards -->    
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                     <div class="bg-blue-50 rounded-lg p-4 text-center">
                         <p class="text-sm text-gray-600">Total Tickets</p>

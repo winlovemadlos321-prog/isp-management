@@ -15,7 +15,7 @@
         <!-- Main Content -->
         <div class="mt-10 py-8 px-4 sm:px-6 lg:px-8">
             <!-- Page Header -->
-            <div class="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 rounded-2xl p-8 mb-8 text-white">
+            <div class="bg-gradient-to-r from-blue-500 via-blue-600 via-10% to-blue-800 rounded-2xl p-8 mb-8 text-white">
                 <div class="flex justify-between items-center">
                     <div>   
                         <h2 class="text-3xl font-bold mb-2">User Management</h2>
@@ -43,7 +43,7 @@
                         <form method="GET" action="{{ route('admin.users.index') }}" class="flex space-x-2">
                             <input type="text" name="search" placeholder="Search users..." 
                                    value="{{ request('search') }}"
-                                   class="px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 text-sm">
+                                   class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm">
                             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition">
                                 <i class="fas fa-search"></i>
                             </button>

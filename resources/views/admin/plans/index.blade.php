@@ -5,12 +5,11 @@
 @section('content')
 <div class="min-h-screen flex">
     @include('layouts.sidebar')
-         @include('layouts.topbar')
-
-
+    
     <div class="flex-1 ml-64">
+        @include('layouts.topbar')
 
-        <div class="mt-20 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="mt-10 py-8 px-4 sm:px-6 lg:px-8">
             <div class="bg-white rounded-2xl shadow-lg p-6">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-gray-800">

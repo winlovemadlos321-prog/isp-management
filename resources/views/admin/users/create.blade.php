@@ -12,7 +12,7 @@
         @include('layouts.topbar')
 
         <!-- Main Content -->
-        <div class="mt-20 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="mt-10 py-8 px-4 sm:px-6 lg:px-8">
             <!-- Page Header -->
             <div class="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 rounded-2xl p-8 mb-8 text-white">
                 <div class="flex justify-between items-center">
@@ -61,7 +61,7 @@
                                     Name <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" id="name" name="name" value="{{ old('name') }}" required
-                                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 @error('name') border-red-500 @enderror">
+                                    class="border border-gray-300 shadow appearance-none rounded-lg w-full py-2 px-3 text-gray-700 outline-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 @error('name') @enderror">
                                 @error('name')
                                     <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
                                 @enderror
@@ -73,7 +73,7 @@
                                     Email <span class="text-red-500">*</span>
                                 </label>
                                 <input type="email" id="email" name="email" value="{{ old('email') }}" required
-                                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 @error('email') border-red-500 @enderror">
+                                    class="border border-gray-300 shadow appearance-none rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 @error('email') @enderror">
                                 @error('email')
                                     <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
                                 @enderror
@@ -85,7 +85,7 @@
                                     Password <span class="text-red-500">*</span>
                                 </label>
                                 <input type="password" id="password" name="password" required
-                                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 @error('password') border-red-500 @enderror">
+                                    class="border border-gray-300 shadow appearance-none rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 @error('password') @enderror">
                                 <p class="text-gray-500 text-xs mt-1">Minimum 8 characters</p>
                                 @error('password')
                                     <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
@@ -98,7 +98,7 @@
                                     Confirm Password <span class="text-red-500">*</span>
                                 </label>
                                 <input type="password" id="password_confirmation" name="password_confirmation" required
-                                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    class="border border-gray-300 shadow appearance-none rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
                             
                             <!-- Role -->
@@ -106,8 +106,7 @@
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="role">
                                     Role <span class="text-red-500">*</span>
                                 </label>
-                                <select id="role" name="role" required
-                                    class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <select id="role" name="role" required class="border border-gray-300 shadow rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <option value="" selected disabled>--Select Role--</option>
                                     <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>admin</option>
                                     <option value="cashier" {{ old('role', $user->role) == 'cashier' ? 'selected' : '' }}>cashier</option>

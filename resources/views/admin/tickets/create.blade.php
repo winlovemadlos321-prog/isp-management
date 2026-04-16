@@ -9,7 +9,7 @@
     <div class="flex-1 ml-64">
         @include('layouts.topbar')
 
-        <div class="mt-20 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="mt-10 py-8 px-4 sm:px-6 lg:px-8">
             <div class="bg-white rounded-2xl shadow-lg p-6">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-gray-800">
@@ -86,13 +86,13 @@
 
                         <!-- Assign to Technician - Fixed with specific names -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Assign to Technician</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Assign Technician</label>
                             <select name="assigned_to" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500">
-                                <option value="">-- Select Technician --</option>
-                                <option value="winlove">Winlove</option>
-                                <option value="rj">RJ</option>
-                                <option value="aleck">Aleck</option>
-                                <option value="manong">Manong</option>
+                                @foreach($technicians as $tech)
+                                    <option value="{{ $tech->id }}">
+                                        {{ $tech->name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
 

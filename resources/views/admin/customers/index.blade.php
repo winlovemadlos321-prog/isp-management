@@ -11,7 +11,7 @@
         @include('layouts.topbar')
         
         <!-- Main Content -->
-        <div class="mt-20 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="mt-10 py-8 px-4 sm:px-6 lg:px-8">
             <!-- Page Header -->
             <div class="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 rounded-2xl p-8 mb-8 text-white">
                 <div class="flex justify-between items-center">
@@ -56,7 +56,7 @@
                         <div class="flex space-x-2">
                             <div class="relative">
                                 <input type="text" id="searchInput" placeholder="Search by name, phone, or customer #..." 
-                                       class="w-64 px-4 py-2 pl-10 border rounded-lg focus:outline-none focus:border-orange-500 text-sm">
+                                    class="w-64 px-4 py-2 pl-10 border rounded-lg focus:outline-none focus:border-orange-500 text-sm">
                                 <i class="fas fa-search absolute left-3 top-3 text-gray-400 text-sm"></i>
                             </div>
                             <button onclick="clearSearch()" id="clearSearchBtn" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition hidden">
@@ -202,8 +202,8 @@
                 let searchMatch = true;
                 if (searchTerm) {
                     searchMatch = name.includes(searchTerm) || 
-                                 phone.includes(searchTerm) || 
-                                 customerNumber.includes(searchTerm);
+                                phone.includes(searchTerm) || 
+                                customerNumber.includes(searchTerm);
                 }
                 
                 // Check filter match

@@ -51,7 +51,7 @@
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
             <div class="px-6 py-4 border-b border-gray-100">
                 <h2 class="text-lg font-semibold text-gray-800">
-                    <i class="fas fa-search text-orange-500 mr-2"></i>Search Customer
+                    <i class="fas fa-search text-orange-500 mr-2"></i>Search Customer<span class="text-sm font-normal italic text-gray-400 ml-2">(input customer name and select from the lists)</span>
                 </h2>
             </div>
             <div class="p-6">
@@ -136,8 +136,8 @@
                         <div class="relative">
                             <span class="absolute left-3 top-2.5 text-gray-500">₱</span>
                             <input type="number" name="amount" id="amount" required step="0.01" 
-                                   class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500" 
-                                   placeholder="0.00">
+                                class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500" 
+                                placeholder="0.00">
                         </div>
                     </div>
                     
@@ -156,7 +156,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Payment Date *</label>
                         <input type="date" name="payment_date" id="payment_date" required value="{{ date('Y-m-d') }}" 
-                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500">
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500">
                     </div>
                     
                     <!-- Payment For Month -->
@@ -203,7 +203,7 @@
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Notes</label>
                         <textarea name="notes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500" 
-                                  placeholder="Additional notes..."></textarea>
+                            placeholder="Additional notes..."></textarea>
                     </div>
                 </div>
                 

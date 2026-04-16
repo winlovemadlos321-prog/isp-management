@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>GamTech ISP - @yield('title')</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    "@fortawesome/fontawesome-free": "^7.2.0"
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: #ffffff;
-            /* background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%); */
+            background: #ffffff;    
         }
         .sidebar-item:hover {
             background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
@@ -28,12 +30,10 @@
         .stat-card:hover {
             transform: translateY(-5px);
         }
-
         .custom-pagination [aria-current="page"] span {
             background-color: #f97316 !important;
             border-color: #f97316 !important;
         }
-
         .custom-pagination a:hover {
             background-color: #fed7aa !important;
             color: #9a3412 !important;

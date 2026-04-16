@@ -13,7 +13,7 @@
         @include('layouts.topbar')
 
         <!-- Main Content -->
-        <div class="mt-20 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="mt-10 py-8 px-4 sm:px-6 lg:px-8">
             <!-- Page Header -->
             <div class="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 rounded-2xl p-8 mb-8 text-white">
                 <div class="flex justify-between items-center">

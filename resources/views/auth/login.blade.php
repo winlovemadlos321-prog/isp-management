@@ -68,24 +68,6 @@
                         </div>
                     </div>
 
-                    <!-- Role Selection -->
-                    <!-- <div>
-                        <label for="role" class="block text-sm font-medium text-gray-100">Login As</label>
-                        <div class="mt-1 relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="h-5 w-5 text-gray-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                            </div>
-                            <select name="role" id="role" required 
-                                class="pl-10 block w-full px-3 py-3 bg-white/5 border border-gray-400 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-200 cursor-pointer">
-                                <option value="admin" class="bg-gray-800">👑 Administrator</option>
-                                <option value="cashier" class="bg-gray-800">💰 Cashier</option>
-                                <option value="technician" class="bg-gray-800">🔧 Technician</option>
-                            </select>
-                        </div>
-                    </div> -->
-
                     <!-- Submit Button -->
                     <div>
                         <button type="submit" 

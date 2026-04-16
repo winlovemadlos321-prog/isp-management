@@ -207,7 +207,7 @@
                                         {{ ucfirst($log->action_type) }}
                                     </span>
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-600">{{ Str::limit($log->description, 60) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">{{ str($log->description)->limit(60) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $log->ip_address }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @php
